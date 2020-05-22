@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Welcome to Amy's kitchen</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    
+    <div class="header">
+		<div class="container">
+     
+			<div class="header-left">
+				<div class="head-nav">
+          
+					<span class="menu"> </span>
+            
+						<ul>
+              <li><a href = "/all">All</a></li>
+              <li><a href = "/appetizer">Appetizer</a></li>
+              <li><a href = "/maincourse">Main Course</a></li>
+              <li><a href = "/dessert">Dessert</a></li>
+              <li><a href = "/drink">Drinks</a></li>
+              <li><a href = "/customer/<%= user_order[0].username%>/cart">My Cart</a></li>	
+              <li class="active"><a href = "/customer/<%= user_order[0].username%>/order">Orders History</a></li>	
+              <li>
+                 
+              <a class="hellouser" href = "/edit">Hello, <%= user_order[0].privateInfo.name %> !</a>
+              </li>
+              <li><a href = "/logout">Log Out</a></li>	
+						</ul>
+					</div>
+				</div>
+					<div class="clearfix"> </div>
+			</div>
+	</div>
+    <br>
+    <div >
+     
+    
+    <ul class="list-group">
+      
+      <% for(var i = 0; i < user_order[0].order.name.length; i++) { %>
+         <div class="card">
+          <li>Name: <%= user_order[0].privateInfo.name %></li>
+          <li>City: <%= user_order[0].privateInfo.address.city %></li>
+          <li>State: <%= user_order[0].privateInfo.address.state %></li>
+          <li>Zip: <%= user_order[0].privateInfo.address.zip %></li>
+          <li>Phone: <%= user_order[0].privateInfo.phone %></li>
+          <li>Email: <%= user_order[0].privateInfo.email %></li>
+          <li>Dishes: <%= user_order[0].order.name[i] %></li>
+          <li>Price: $<%= user_order[0].order.price[i] %></li>
+
+        
+        <div class="clearfix"></div>
+        </div>
+      <br>
+      <% } %>
+     
+      
+      
+      
+      
+     
+    </ul>
+      
+    
+  
+    
+  </div>
+    
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js"></script>
+  </body>
+</html>
+
+
+
