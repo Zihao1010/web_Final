@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Welcome to Amy's kitchen</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    
+    <div class="header">
+		<div class="container">
+			<div class="header-left">
+				<div class="head-nav">
+					<span class="menu"> </span>
+						<ul>
+              <li ><a href = "/all">All</a></li>
+              <li><a href = "/appetizer">Appetizer</a></li>
+              <li><a href = "/maincourse">Main Course</a></li>
+              <li><a href = "/dessert">Dessert</a></li>
+              <li><a href = "/drink">Drinks</a></li>	
+              <li><a href = "/customer/<%= user_info.username%>/cart">My Cart</a></li>	
+              <li><a href = "/customer/<%= user_info.username%>/order">Orders History</a></li>	
+              <li>
+                 
+             <a class="hellouser" href = "/edit">Hello, <%= user_info.privateInfo.name %> !</a>
+           
+              </li>
+              <li><a href = "/logout">Log Out</a></li>	
+						</ul>
+					</div>
+				</div>
+					<div class="clearfix"> </div>
+			</div>
+	</div>
+    <br>
+    <div >
+    
+      <p class="p"><%= message %></p>
+    
+  </div>
+    
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js"></script>
+  </body>
+</html>
+
+
