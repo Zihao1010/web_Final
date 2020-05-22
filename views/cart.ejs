@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Welcome to Amy's kitchen</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    
+    <div class="header">
+		<div class="container">
+     
+			<div class="header-left">
+				<div class="head-nav">
+          
+					<span class="menu"> </span>
+            
+						<ul>
+              
+              <li><a href = "/all">All</a></li>
+              <li><a href = "/appetizer">Appetizer</a></li>
+              <li><a href = "/maincourse">Main Course</a></li>
+              <li><a href = "/dessert">Dessert</a></li>
+              <li><a href = "/drink">Drinks</a></li>	
+              <li class="active"><a href = "/customer/<%= user_cart[0].username%>/cart">My Cart</a></li>	
+              <li><a href = "/customer/<%= user_cart[0].username%>/order">Orders History</a></li>	
+              <li>
+                 <% user_cart.forEach(function(user) { %>
+              <a class="hellouser" href ="/edit">Hello, <%= user.privateInfo.name %> !</a>
+           <% }) %>
+              </li>
+              <li><a href = "/logout">Log Out</a></li>	
+						</ul>
+					</div>
+				</div>
+					<div class="clearfix"> </div>
+			</div>
+	</div>
+    <br>
+    <div >
+     <ul >
+        <div class="title">
+        <li class="cart">Dishes</li>
+        <li class="cart">Unit Price</li>
+        <li class="cart">Total Price</li>
+  
+        <div class="clearfix"></div>
+        </div>
+      
+    </ul>
+    
+    <ul >
+      <% var sum = function (){ 
+           var result = 0; 
+          for(var i = 0; i < user_cart[0].cart.price.length; i++) { 
+              result += parseInt(user_cart[0].cart.price[i]);  }
+         return result;
+         };%>
+      
+        <div class="dish">
+        <li class="cart"><%= user_cart[0].cart.name %></li>
+        <li class="cart"><%= user_cart[0].cart.price %></li>
+			  
+        <li class="cart">$<%= sum(user_cart[0].cart.price)%></li>
+        
+        <% if(user_cart[0].cart.name.length != 0) {%>
+        <li class="bt-nn">  
+          <form action="/customer/<%= user_cart[0].username %>/deletecart" method="post" class="form-inline my-2 my-lg-0" >
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Empty cart</button>
+          </form>
+        </li>
+        
+        <li class="bt-nn">
+          
+          <form action="/customer/<%= user_cart[0].username %>/order" method="post" class="form-inline my-2 my-lg-0" >
+            <input name="name" type="text" class="form-control" value="<%= user_cart[0].cart.name%>" style="display: none">
+            <input name="price" type="text" class="form-control" value="<%= sum(user_cart[0].cart.price)%>" style="display: none">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Checkout</button>
+          </form>
+			  </li>
+        <% } %>
+        <div class="clearfix"></div>
+        </div>
+      
+      <br>
+      
+      
+     
+    </ul>
+      
+    
+  
+    
+  </div>
+    
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js"></script>
+  </body>
+</html>
+
+
