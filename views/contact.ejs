@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Welcome to Amy's kitchen</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+<body>
+<!-- header -->
+
+	<div class="header">
+		
+		<div class="container">
+			
+			<div class="header-left1">
+				<div class="head-nav">
+					<span class="menu"> </span>
+						<ul>
+							<li><a href="/">Home</a></li>			
+							<li  class="active"><a href="/contact">Contact</a></li>			
+						</ul>
+
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+					<div class="clearfix"> </div>
+			</div>
+	</div><br>
+<!-- header -->
+
+  <div id="board">
+	<p id="pp">Give us some suggestions or feedback:</p>
+	<div class="message" contenteditable="true"></div>
+    <br>
+	<div class="Button">
+		<button id="submit" class="btn btn-outline-success my-2 my-sm-0">Submit</button>
+		
+	</div>
+</div>
+<div class="msgCon"></div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+	//Get data from cache and render
+	let msgBoxList = JSON.parse(window.localStorage.getItem('msgBoxList')) || [];
+	innerHTMl(msgBoxList)
+
+	//Click the button to post the content
+	$("button#submit").click(function () {
+		let txt = $(".message").html(); //Get input box content
+		if (!txt) {
+			$('.message').focus(); 
+			return;
+		}
+		let obj = {
+			msg: txt
+		}
+		msgBoxList.unshift(obj) 
+		window.localStorage.setItem('msgBoxList', JSON.stringify(msgBoxList)) //Save data to cache
+		innerHTMl([obj]) //Render the current input box content
+		$('.message').html('') // Clear input box
+
+	});
+
+	//Delete current data
+	$("body").on('click', '#del', function () {
+		let index = $(this).parent().parent().index();
+		msgBoxList.splice(index, 1)
+		window.localStorage.setItem('msgBoxList', JSON.stringify(msgBoxList)) 
+		$(this).parent().parent().remove()
+	})
+
+	//Render html
+	function innerHTMl(List) {
+		List = List || []
+		List.forEach(item => {
+			let str =
+				`<div class='msgBox'>
+					<div class="headUrl">
+            <img src="https://cdn.glitch.com/2002c15e-3e50-4a5f-bd76-ca1e3c0b7551%2Flpmkdoov.jpg?v=1575739633527" width='50' height='50'>
+            <span id="s">Someone says:</span>
+						<button id="del" class="btn btn-outline-success my-2 my-sm-0">Delete</button>
+					</div>
+					<div class='msgTxt'>
+						${item.msg}
+					</div>
+				</div>`
+			$(".msgCon").prepend(str);
+		})
+	}
+</script>
+  
+
+  
+  
+
+</body>
+</html>
